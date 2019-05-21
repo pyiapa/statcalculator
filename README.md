@@ -139,7 +139,9 @@ in CSV format as well as python scripts to visualize the results.
 is installed). Each statistic output directory will contain a 'requirements.txt' file.
 To install the Python requirements, type:
 
+```python
   pip install -r requirements.txt
+  ```
 
 * To visualize a statistic, cd to the desired statistic directory (e.g. costliest_month) and type:
 
