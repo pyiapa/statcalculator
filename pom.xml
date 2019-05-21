@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+	<modelVersion>4.0.0</modelVersion>
+  
+  	<groupId>com.pyiapa</groupId>
+  	<artifactId>statcalculator</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  
+  	<name>statcalculator</name>
+  	<description>application that generates simple summary statistics</description>
+  
+  	<packaging>jar</packaging>
+  
+  	<properties>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scala.version>2.11.11</scala.version>
+		<java.version>1.8</java.version>
+  	</properties>
+  	
+  	<dependencies>
+		<dependency>
+			<artifactId>scala-library</artifactId>
+			<groupId>org.scala-lang</groupId>
+			<version>${scala.version}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.apache.spark</groupId>
+    		<artifactId>spark-core_2.11</artifactId>
+    		<version>2.3.1</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_2.11</artifactId>
+			<version>2.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+  			<groupId>org.scalactic</groupId>
+  			<artifactId>scalactic_2.11</artifactId>
+  			<version>3.0.0</version>
+		</dependency>
+		
+		<dependency>
+  			<groupId>org.scalatest</groupId>
+  			<artifactId>scalatest_2.11</artifactId>
+  			<version>3.0.4</version>
+  			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<artifactId>junit</artifactId>
+			<groupId>junit</groupId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+			
+		
+
+	</dependencies>
+	
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
+		
+		<plugins>
+		
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>4.0.1</version>
+				<executions>
+					<execution>
+						<id>test</id>
+     					<goals>
+        					<goal>compile</goal>
+							<goal>testCompile</goal>
+      					</goals>
+					</execution>
+				</executions>
+			</plugin>
+		
+			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-surefire-plugin</artifactId>
+  				<version>2.7</version>
+  				<configuration>
+    				<skipTests>true</skipTests>
+  				</configuration>
+			</plugin>
+			
+			<plugin>
+  				<groupId>org.scalatest</groupId>
+  				<artifactId>scalatest-maven-plugin</artifactId>
+  				<version>1.0</version>
+  				<configuration>
+    				<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+    				<junitxml>.</junitxml>
+    				<filereports>WDF TestSuite.txt</filereports>
+  				</configuration>
+  				<executions>
+    				<execution>
+	      				<id>scala-test</id>
+	      				<goals>
+	        				<goal>test</goal>
+	      				</goals>
+    				</execution>
+  				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-assembly-plugin</artifactId>
+			    <version>3.1.1</version>
+			    <configuration>
+			      <descriptorRefs>
+			        <descriptorRef>jar-with-dependencies</descriptorRef>
+			      </descriptorRefs>
+			      <archive>
+			        <manifest>
+			          <mainClass>com.pyiapa.statcalculator.app.Main</mainClass>
+			        </manifest>
+			      </archive>
+			    </configuration>
+			    <executions>
+			      <execution>
+			        <phase>package</phase>
+			        <goals>
+			          <goal>single</goal>
+			        </goals>
+			      </execution>
+			    </executions>
+  			</plugin>
+  			
+  			<plugin>
+			    <artifactId>maven-resources-plugin</artifactId>
+			    <version>3.0.2</version>
+			    <executions>
+			         <execution>
+			            <id>copy-resources</id>
+			            <!-- here the phase you need -->
+			            <phase>validate</phase>
+			            <goals>
+			               <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			               <outputDirectory>${basedir}/target/visualization-scripts</outputDirectory>
+			               <resources>          
+			                    <resource>
+			                        <directory>src/main/resources/scripts/visualization</directory>
+			                        <filtering>true</filtering>
+			                    </resource>
+			               </resources>              
+			            </configuration>            
+			        </execution>
+			     </executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+  
+</project>
