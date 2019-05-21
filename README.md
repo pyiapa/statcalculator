@@ -61,7 +61,7 @@ but only to serve as an example.
 
 ## Assumptions ##
  
- * I have assumed that the data can grow to giga/tera/peta/ and thus decided to build a Spark application
+ * I have assumed that the data can grow to giga/tera/peta/ bytes and thus decided to build a Spark application
  that can run on a cluster environment. 
  
  * I have assumed that if an expense is reimbursed then the amount (cost) for that item will be zero.
@@ -76,7 +76,7 @@ but only to serve as an example.
  
 ## Output ##
  
- * When the application is built, a jar will be generated in the '/target'. Executing the jar will produce a folder '/output'
+ * When the application is built, a jar will be generated in the '/target' directory. Executing the jar will produce a folder '/output'
  in the current running directory. Inside the output folder there will be a separate folder for each 
  statistic. The folders indicate statistic output and are named after the statistics. Each of these folders will have 
  a CSV file containing the output for a given statistic. This file can be used for visualization (see 'Visualization' section)
@@ -121,7 +121,9 @@ required to be install to run maven (JDK 1.8 or above in this case).
 * To run the application in a local machine, cd inside the directory of the built jar file and type the
 following command in the terminal:
 
+```scala
   java -jar statcalculator-0.0.1-SNAPSHOT-jar-with-dependencies
+```
 
 * To run in a cluster, please change the parameter in SparkSession before building,
 to the desired number of cores wishing the application to utilize. Also, you will need to
@@ -141,7 +143,9 @@ To install the Python requirements, type:
 
 * To visualize a statistic, cd to the desired statistic directory (e.g. costliest_month) and type:
 
+```python
   Python costliest_month.py
+  ```
 
   This will produce a plot of the result for the costliest month
 
