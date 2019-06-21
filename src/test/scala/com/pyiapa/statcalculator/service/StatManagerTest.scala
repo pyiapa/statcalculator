@@ -109,7 +109,9 @@ class StatManagerTest extends FunSuite {
       
       val csv_files =  getListOfFiles(dir, requiredFileExtensions)
       
-      val df = InputParser.loadCSVToDF(csv_files(0).toPath().toString())
+      val spark = MainSparkSession.getCurrentSparkSession()
+      
+      val df = spark.read.format("csv").option("header", "true").load(csv_files(0).toPath().toString())
       
       val result = df.select("Title").first().get(0)
       

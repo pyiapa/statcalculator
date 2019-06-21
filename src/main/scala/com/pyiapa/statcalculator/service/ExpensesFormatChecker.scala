@@ -12,7 +12,7 @@ import java.lang.RuntimeException
  * @pyiapa
  * 
  */
-trait ExpensesFormatChecker {
+trait ExpensesFormatChecker{
   
   final val COLUMN_SIZE = 5
   
