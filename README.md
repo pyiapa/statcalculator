@@ -9,34 +9,17 @@ Email: pyiapa@gmail.com
 
 ## Project Description ##
 
-This project calculates various summary statistics based on an expenses input CSV file.
+This project computes various summary statistics based on an expenses input CSV file.
 Each row of the input file indicates a given expense. The row provides information on the date, 
 type of expense, amount, whether it was reimbursed, and location.
 
 
-## Important Notes ##
-
-* If I knew that the size of the data will always be manageable in a single typical machine,
-I would have created a pure Python application. All the implementation would have been simpler
-and more flexible in Python.
-
-* Nevertheless, I have decided to go with the assumption that the data will grow to very large 
-sizes (gigabytes, terabytes, petabytes) and thus I have used Apache Spark to implement a solution
-that can be deployed in a cluster environment.
-
-* Spark can mainly be programmed in Scala, Java, or Python. I have decided to go with a JVM language
-since the JVM runtime is faster than Python's runtime. Between Scala and Java, I have chosen Scala
-for two reasons: it is more concise; and  whenever a new feature comes out in Spark,
-it is first implemented in Scala before the other two languages (so the most up-to-date).
-
-* After building, the application is ready to run on a Spark cluster or a local machine
-
 ## Design Decisions ##
 
-* I was asked to provide 4 different summary statistics for the expenses input provided.
+* At the moment, the code computes 4 different summary statistics for the expenses input provided.
 Each statistic is implemented as a separate class (i.e. separation of concerns).
 
-* To make the application clearer and open for extension I have created a 
+* To make the application cleaner and open for extension I have created a 
 manager class (StatManager) to manage the calculation of each statistic. This resembles 
 the Command design pattern.
 
@@ -164,11 +147,13 @@ To install the Python requirements, type:
 
 * If running on a cluster, Input could be loaded directly from a storage like Amazon S3.
 
+* Output could also be moved to S3 for persistent storage
+
 * In a cluster, results could be visualized using Apache Zeppelin. Zeppelin integrates well with Spark
 and for example can be used to execute SQL queries directly against SparkSQL. Query results can be visualized
 using charts and graphs
 
-* Output could also be moved to S3 for persistent storage
+* Results could be also exported in hive tables and visualized via external software such as Tableau 
 
 * Scala does not provide a flexible and nice way to visualize results. In a local machine a nice
 Python application could be developed for visualization.
