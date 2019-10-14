@@ -16,8 +16,14 @@ type of expense, amount, whether it was reimbursed, and location.
 
 ## Design Decisions ##
 
-* At the moment, the code computes 4 different summary statistics for the expenses input provided.
-Each statistic is implemented as a separate class (i.e. separation of concerns).
+* At the moment, the code computes 4 different summary statistics for the expenses input provided:
+  - Most visited country
+  - Most visited country in 2018
+  - Costliest month
+  - Daily spending for the last 60 days
+
+
+* Each statistic is implemented as a separate class (single responsibility).
 
 * To make the application cleaner and open for extension I have created a 
 manager class (StatManager) to manage the calculation of each statistic. This resembles 
