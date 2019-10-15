@@ -2,6 +2,8 @@ package com.pyiapa.statcalculator.service
 
 import com.pyiapa.statcalculator.domain.Result
 
+import org.apache.spark.sql.DataFrame
+
 
 /**
  * Interface that every statistic must implement.
@@ -21,6 +23,16 @@ trait Statistic {
    * @return Result. the result of the computation.
    */
   def calculate(): Result
+  
+  
+  /**
+   * Ensures that the input conforms to the correct format.
+   * 
+   * @param inputDF. the input data frame
+   * 
+   */
+  def checkFormat(inputDF: DataFrame) = {
+  }
   
   /**
    * Returns the name of the statistic

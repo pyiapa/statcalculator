@@ -18,7 +18,7 @@ import java.text.DateFormatSymbols
  * @author pyiapa
  * 
  */
-class CostliestMonth(val inputDF: DataFrame) extends Statistic with ExpensesFormatChecker{
+class CostliestMonth(val inputDF: DataFrame) extends ExpensesStatistic{
   
    name = "costliest_month"
    

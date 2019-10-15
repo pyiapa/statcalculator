@@ -11,7 +11,7 @@ import org.apache.spark.sql.DataFrame
  * @author pyiapa
  * 
  */
-class MostVisitedCountry2018(val inputDF: DataFrame) extends Statistic with ExpensesFormatChecker{
+class MostVisitedCountry2018(val inputDF: DataFrame) extends ExpensesStatistic{
   
    name = "most_visited_country_2018"
    

@@ -5,14 +5,13 @@ import org.apache.spark.sql.DataFrame
 import java.lang.RuntimeException
 
 /**
- * Ensures that every class processing an expenses file
- * (e.g. with columns "date, expense, amount, reimbursed, location" and in String format)
- * is using a file of the correct format
+ * Describes an expenses Statistic
+ * (i.e. with columns "date, expense, amount, reimbursed, location", provided in String format)
  * 
  * @pyiapa
  * 
  */
-trait ExpensesFormatChecker{
+trait ExpensesStatistic extends Statistic {
   
   final val COLUMN_SIZE = 5
   
@@ -23,7 +22,7 @@ trait ExpensesFormatChecker{
    * @param inputDF the dataset in question
    * 
    */
-  def checkFormat(inputDF: DataFrame) = {
+  override def checkFormat(inputDF: DataFrame) = {
     
     val columns = inputDF.columns
     

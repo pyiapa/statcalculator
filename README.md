@@ -11,7 +11,7 @@ Email: pyiapa@gmail.com
 
 This project computes various summary statistics based on an expenses input CSV file.
 Each row of the input file indicates a given expense. The row provides information on the date, 
-type of expense, amount, whether it was reimbursed, and location.
+type of expense, amount, whether it was reimbursed or not, and location.
 
 
 ## Design Decisions ##
@@ -26,21 +26,21 @@ type of expense, amount, whether it was reimbursed, and location.
 * Each statistic is implemented as a separate class (single responsibility).
 
 * To make the application cleaner and open for extension I have created a 
-manager class (StatManager) to manage the calculation of each statistic. This resembles 
-the Command design pattern.
+manager class (StatManager) to manage the calculation of each statistic.
 
-* Each statistic must extend the Statistic abstract class (trait in Scala). 
+* Each statistic is represented as a general Statistic abstract class (trait in Scala). 
 Thus the StatManager manages several Statistic objects without the need to know what each statistic does.
 
 * Using this approach, the developer can easily extend the application by creating a new statistic 
 and simply registering it with the StatManager (the StatManager handles all functionality and does not need to be modified).
-
+  
 * The result of each statistic is held in a Result object
 
-* To ensure correct file format I have created an abstract class called ExpensesFormatChecker. Every
-statistic that will use the format of the input file provided in this example (the expenses file) must
-implement the ExpensesFormatChecker. ExpensesFormatChecker handles the format checking. Statistics
-that use different input file formats can use a different FormatChecker (to be implemented accordingly).
+* To ensure correct file format, statistics are further subdivided into other traits depending on the area they serve. For example,
+statistics that related to expenses, follow a specific format. Thus, there will be an ExpensesStatistic (which in turn extends Statistic) trait
+where they can extend from.  Statistics that use different input file formats can use a different trait (to be implemented accordingly) in
+a similar fashion. The motivation behind this is to allow shared format checking and avoid implementing the same functionality if the statistics
+share he same input format. 
 
 * Ultimately, we can create new statistics without changing the main logic. The StatManager also does
 not know (and does not care) about the format of the input. This is handle by the format checkers.
@@ -159,7 +159,4 @@ To install the Python requirements, type:
 and for example can be used to execute SQL queries directly against SparkSQL. Query results can be visualized
 using charts and graphs
 
-* Results could be also exported in hive tables and visualized via external software such as Tableau 
-
-* Scala does not provide a flexible and nice way to visualize results. In a local machine a nice
-Python application could be developed for visualization.
+* Results could be also exported in hive tables and visualized via external software such as Tableau

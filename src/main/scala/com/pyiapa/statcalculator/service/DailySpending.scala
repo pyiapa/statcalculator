@@ -14,7 +14,7 @@ import org.apache.spark.sql.DataFrame
  * @author pyiapa
  * 
  */
-class DailySpending(val inputDF: DataFrame) extends Statistic with ExpensesFormatChecker{
+class DailySpending(val inputDF: DataFrame) extends ExpensesStatistic{
   
    name = "daily_spending_last_60_days"
    

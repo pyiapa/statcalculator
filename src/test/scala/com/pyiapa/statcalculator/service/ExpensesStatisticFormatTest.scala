@@ -10,14 +10,17 @@ import com.pyiapa.statcalculator.domain._
 import com.pyiapa.statcalculator.app._
 
 /**
- * Class to test the ExpensesFomrmatChecker functinality
+ * Class to test the format checking functionality
  */
-class ExpensesFormatCheckerTest extends FunSuite{
+class ExpensesStatisticFormatTest extends FunSuite{
   
   val spark = MainSparkSession.getCurrentSparkSession()
   import spark.implicits._
   
-  object FakeImpl extends ExpensesFormatChecker {
+  object FakeImpl extends ExpensesStatistic {
+    override def calculate(): Result = {
+      null
+    }
   }
   
   test("Test dataframe with incorrect column number") {
