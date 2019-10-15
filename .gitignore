@@ -1,1 +1,14 @@
-/target/
+# IDE
+.classpath
+.project
+.settings/
+.cache-tests
+.cache-main
+
+
+# Mac
+**/.DS_Store
+
+# Maven
+target/
+spark-warehouse/
